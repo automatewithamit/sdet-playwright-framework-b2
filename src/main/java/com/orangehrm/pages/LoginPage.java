@@ -8,8 +8,11 @@ import com.orangehrm.locators.LoginPageLocators;
 public class LoginPage extends BasePage {
     //WebElements on the Login Page
     //Methods to interact with the WebElements
-    Page page;
+//    Page page;
     public LoginPage(Page page) {
+        super(page);
+//        super(page);
+
         this.page = page;
     }
     Locator userNameTextBox = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Username"));

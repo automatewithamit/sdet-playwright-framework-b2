@@ -7,8 +7,9 @@ import com.microsoft.playwright.options.AriaRole;
 import com.orangehrm.locators.DashboardPageLocators;
 
 public class DashboardPage extends BasePage {
-    Page page;
+//    Page page;
     public DashboardPage(Page page) {
+        super(page);
 
         this.page = page;
     }
