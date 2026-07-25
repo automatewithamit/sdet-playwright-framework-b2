@@ -1,5 +1,6 @@
 package com.orangehrm.pages;
 
+import com.awa.framework.core.PlaywrightDriver;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
@@ -7,11 +8,10 @@ import com.microsoft.playwright.options.AriaRole;
 import com.orangehrm.locators.DashboardPageLocators;
 
 public class DashboardPage extends BasePage {
-    Page page;
-    public DashboardPage(Page page) {
 
-        this.page = page;
-    }
+//    public DashboardPage(Page page) {
+//        super(page);
+//    }
 
 
 
@@ -31,7 +31,7 @@ public class DashboardPage extends BasePage {
 
 
     public String getDashboardTitle() {
-        return page.url();
+        return PlaywrightDriver.getPage().url();
     }
 
 
