@@ -1,9 +1,6 @@
 package com.awa.framework.core;
 
-import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserType;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.*;
 
 public class PlaywrightDriver {
     //Single Responsibility
@@ -15,50 +12,114 @@ public class PlaywrightDriver {
 
 
     //This class is responsible for initializing Playwright, Browser, and Page instances
-    static Playwright playwright;
-    static Browser browser;
-    static Page page;
+    //static Playwright playwright;
+    //static Browser browser;
+    private static final ThreadLocal<Playwright> threadLocalPlaywright = new ThreadLocal<>();
+    private static final ThreadLocal<Browser> threadLocalBrowser = new ThreadLocal<>();
+    private static final ThreadLocal<APIRequestContext> threadLocalAPIRequestContext = new ThreadLocal<>();
+    private static final ThreadLocal<BrowserContext> threadLocalContext = new ThreadLocal<>();
+    private static final ThreadLocal<Page> threadLocalPage = new ThreadLocal<>();
+
 
     public static Playwright getPlaywright() {
-        playwright = Playwright.create();
+        Playwright playwright = Playwright.create();
+        threadLocalPlaywright.set(playwright);
         System.out.println("Playwright Initialized");
         return playwright;
     }
+
     public static void getBrowser() {
-        if (playwright == null) {
-            getPlaywright();
+//        if (threadLocalPlaywright.get() == null) {
+//            getPlaywright();
+//        }
+        if (threadLocalBrowser.get() == null) {
+            //Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+            Browser browser = threadLocalPlaywright.get().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+            threadLocalBrowser.set(browser);
         }
-        //Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
-        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
         System.out.println("Browser Launched");
+
     }
 
-    public static Page getPage() {
-        if (browser == null) {
-            getBrowser();
+    public static void getApiContext() {
+//        if (threadLocalPlaywright.get() == null) {
+//            getPlaywright();
+//        }
+        if (threadLocalAPIRequestContext.get() == null) {
+            //Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+            APIRequestContext apiRequestContext = threadLocalPlaywright.get().request().newContext(new APIRequest.NewContextOptions().setBaseURL(""));
+            threadLocalAPIRequestContext.set(apiRequestContext);
         }
-        if (page == null) {
-            page = browser.newContext().newPage();
-            System.out.println("New Page Created");
-        }
-        return page;
+        System.out.println("Browser Launched");
+
     }
+
+    public static void initializeContextAndPage() {
+        //getBrowser();
+        BrowserContext currentContext = threadLocalBrowser.get().newContext();
+        threadLocalContext.set(currentContext);
+
+        System.out.println("New Context Created");
+        Page newPage = currentContext.newPage();
+        threadLocalPage.set(newPage);
+
+        System.out.println("New Page Created");
+
+    }
+
+    public static void initializeContextAndPage1() {
+        //getBrowser();
+        BrowserContext currentContext = threadLocalBrowser.get().newContext();
+        threadLocalContext.set(currentContext);
+
+        System.out.println("New Context Created");
+        Page newPage = currentContext.newPage();
+        threadLocalPage.set(newPage);
+
+        System.out.println("New Page Created");
+
+    }
+
+//    public void initiallizePage() {
+//
+//        initiallizeContext();
+//        if (page == null) {
+//            BrowserContext context = threadLocalContext.get();
+//            threadLocalPage.set(context.newPage());
+//            System.out.println("New Page Created");
+//        }
+//    }
+
+    public static Page getPage() {
+        return threadLocalPage.get();
+    }
+    public BrowserContext getContext(){
+        return threadLocalContext.get();
+    }
+
     public static void closeBrowser() {
-        if (browser != null) {
-            browser.close();
+        if (threadLocalBrowser.get() != null) {
+            threadLocalBrowser.get().close();
+            threadLocalBrowser.remove();
             System.out.println("Browser Closed");
         }
     }
+
     public static void closeContext() {
-        if (page != null) {
-            page.context().close();
+        BrowserContext currentContext = threadLocalContext.get();
+
+        if (currentContext != null) {
+            currentContext.close();
             System.out.println("Context Closed");
         }
+        threadLocalContext.remove();
+        threadLocalPage.remove();
     }
 
     public static void closePlaywright() {
-        if (playwright != null) {
-            playwright.close();
+        if (threadLocalPlaywright.get() != null) {
+            threadLocalPlaywright.get().close();
+            threadLocalPlaywright.remove();
             System.out.println("Playwright Closed");
         }
     }

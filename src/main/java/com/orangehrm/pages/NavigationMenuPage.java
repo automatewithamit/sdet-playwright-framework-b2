@@ -11,7 +11,7 @@ public class NavigationMenuPage extends BasePage {
 //        super(page);
 //    }
     public Locator getMenuLocator(String menuName) {
-        return PlaywrightDriver.getPage().getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(menuName));
+        return Page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(menuName));
     }
 
     public void clickMenu(String menuName) {

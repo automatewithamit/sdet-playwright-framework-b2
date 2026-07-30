@@ -31,17 +31,27 @@ public class OHRMLoginTests extends BaseTest {
 
         System.out.println("Valid Login Test Executed");
     }
-
-    @Test(description = "Verify that the user cannot log in with invalid credentials.")
-    public void invalidLoginTest() {
+    @Test(description = "Verify that the user can log in successfully with valid credentials.")
+    public void validLoginTest2() {
         //Test Steps
-        //1. Open Browser
+
         LoginPage loginPage = new LoginPage();
+        DashboardPage dashboardPage = new DashboardPage();
         loginPage.navigateToLoginPage();
-        loginPage.login("Admin", "admin1234");
+        loginPage.login("Admin", "admin123");
+        String dashboardPageURL =  dashboardPage.getDashboardTitle();
 
-        //assert page.getByText("Invalid credentials").isVisible();
+        System.out.println("Dashboard Page URL: " + dashboardPageURL);
+        //assert dashboardPageURL.contains("dashboard");
 
 
+        dashboardPage.navigateTo("Admin");
+        RecruitmentPage recruitmentPage = new RecruitmentPage();
+        recruitmentPage.navigateTo("Dashboard");
+
+        //assert dashboardPageURL.contains("admin");
+
+        System.out.println("Valid Login Test Executed");
     }
+
 }

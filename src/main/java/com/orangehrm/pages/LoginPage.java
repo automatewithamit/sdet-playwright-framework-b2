@@ -13,9 +13,9 @@ public class LoginPage extends BasePage {
 //    public LoginPage(Page page) {
 //        super(page);
 //    }
-    Locator userNameTextBox = PlaywrightDriver.getPage().getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Username"));
-    Locator passwordTextBox = PlaywrightDriver.getPage().getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Password"));
-    Locator loginButton = PlaywrightDriver.getPage().getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Login"));
+    Locator userNameTextBox = Page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Username"));
+    Locator passwordTextBox = Page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Password"));
+    Locator loginButton = Page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Login"));
 
     public void login(String username, String password) {
         //Code to perform login action
@@ -24,6 +24,8 @@ public class LoginPage extends BasePage {
         passwordTextBox.fill(password);
         loginButton.click();
     }
+
+
     public void navigateToLoginPage() {
         PlaywrightDriver.getPage().navigate("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
     }
