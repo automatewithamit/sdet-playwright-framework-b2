@@ -5,6 +5,8 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 
+import static com.awa.framework.webelements.UIActions.*;
+
 public class NavigationMenuPage extends BasePage {
 
 //    public NavigationMenuPage(Page page) {
@@ -15,6 +17,6 @@ public class NavigationMenuPage extends BasePage {
     }
 
     public void clickMenu(String menuName) {
-        getMenuLocator(menuName).click();
+        click(getMenuLocator(menuName));
     }
 }

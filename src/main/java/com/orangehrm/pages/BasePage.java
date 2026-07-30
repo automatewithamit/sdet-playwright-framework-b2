@@ -1,6 +1,7 @@
 package com.orangehrm.pages;
 
 import com.awa.framework.core.PlaywrightDriver;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
 public class BasePage {
@@ -12,4 +13,5 @@ public class BasePage {
         NavigationMenuPage navigationMenuPage = new NavigationMenuPage();
         navigationMenuPage.clickMenu(menu);
     }
+
 }

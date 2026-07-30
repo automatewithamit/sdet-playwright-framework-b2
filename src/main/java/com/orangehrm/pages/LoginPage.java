@@ -1,10 +1,13 @@
 package com.orangehrm.pages;
 
 import com.awa.framework.core.PlaywrightDriver;
+import com.awa.framework.webelements.UIActions;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.orangehrm.locators.LoginPageLocators;
+
+import static com.awa.framework.webelements.UIActions.*;
 
 public class LoginPage extends BasePage {
     //WebElements on the Login Page
@@ -20,9 +23,9 @@ public class LoginPage extends BasePage {
     public void login(String username, String password) {
         //Code to perform login action
         //2. Navigate to Login Page
-        userNameTextBox.fill(username);
-        passwordTextBox.fill(password);
-        loginButton.click();
+        fillTextBox(userNameTextBox,username);
+        fillTextBox(passwordTextBox,password);
+        click(loginButton);
     }
 
 
@@ -32,13 +35,16 @@ public class LoginPage extends BasePage {
 
     public void login(String username, String password, boolean rememberMe) {
         //Code to perform login action with Remember Me option
-        userNameTextBox.fill(username);
-        passwordTextBox.fill(password);
+        fillTextBox(userNameTextBox,username);
+        fillTextBox(passwordTextBox,password);
         if (rememberMe) {
             PlaywrightDriver.getPage().getByRole(AriaRole.CHECKBOX, new Page.GetByRoleOptions().setName("Remember Me")).check();
         }
-        loginButton.click();
+        click(loginButton);
     }
+
+
+
 
 
 }
