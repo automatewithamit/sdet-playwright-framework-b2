@@ -41,17 +41,13 @@ public class PlaywrightDriver {
 
     }
 
-    public static void getApiContext() {
-//        if (threadLocalPlaywright.get() == null) {
-//            getPlaywright();
-//        }
+    public static APIRequestContext getApiContext(String baseUrl) {
         if (threadLocalAPIRequestContext.get() == null) {
-            //Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
-            APIRequestContext apiRequestContext = threadLocalPlaywright.get().request().newContext(new APIRequest.NewContextOptions().setBaseURL(""));
+            APIRequestContext apiRequestContext = getPlaywright().request().newContext(new APIRequest.NewContextOptions().setBaseURL(baseUrl));
             threadLocalAPIRequestContext.set(apiRequestContext);
         }
-        System.out.println("Browser Launched");
-
+        System.out.println("New API Context Created");
+        return threadLocalAPIRequestContext.get();
     }
 
     public static void initializeContextAndPage() {
