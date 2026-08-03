@@ -1,4 +1,4 @@
-package com.framework.tests;
+package com.yatra.tests;
 
 import com.microsoft.playwright.*;
 import org.testng.annotations.*;

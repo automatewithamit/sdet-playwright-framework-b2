@@ -4,14 +4,14 @@
 <!--    <test name="Login Tests">-->
 <!--        <parameter name="browser" value="chrome"/>-->
 <!--        <classes>-->
-<!--            <class name="com.framework.tests.LoginTests"/>-->
-<!--            <class name="com.framework.tests.InValidLoginTests"/>-->
+<!--            <class name="com.yatra.tests.LoginTests"/>-->
+<!--            <class name="com.yatra.tests.InValidLoginTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 <!--    <test name="AI Search Tests">-->
 <!--        <parameter name="browser" value="edge"/>-->
 <!--        <classes>-->
-<!--            <class name="com.framework.tests.HomePageAISearchTests"/>-->
+<!--            <class name="com.yatra.tests.HomePageAISearchTests"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
