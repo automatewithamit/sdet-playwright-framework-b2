@@ -12,6 +12,8 @@ public class BasePage {
     public void navigateTo(String menu) {
         NavigationMenuPage navigationMenuPage = new NavigationMenuPage();
         navigationMenuPage.clickMenu(menu);
+
     }
+
 
 }
