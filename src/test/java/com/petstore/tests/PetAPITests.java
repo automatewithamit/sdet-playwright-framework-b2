@@ -1,29 +1,23 @@
 package com.petstore.tests;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.petstore.pojo.Category;
 import com.petstore.pojo.Pet;
 import com.petstore.pojo.Tag;
-import com.petstore.pojo.User;
 import com.petstore.som.pet.PetPostResponse;
 import com.petstore.som.pet.PostPetSOM;
-import com.petstore.som.user.PostUserSOM;
-import com.petstore.som.user.UserPOSTResponse;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class PetAPITests {
 
-    @Test
+    @Test(description = "Test to create a new pet in the Petstore API")
     public void testCreatePets() throws JsonProcessingException {
-//        User user = new User("amittripathi", "Amit", "Tripathi", "amit.tripathi@gmail.com", "amit@123", "9876543210");
-//        UserPOSTResponse userResponse = PostUserSOM.createUser(user);
-//
-//        System.out.println("Message : " + userResponse.getMessage());
-//        System.out.println("Code : " + userResponse.getCode());
-//        System.out.println("Type : " + userResponse.getType());
+//      User user = new User("amittripathi", "Amit", "Tripathi", "amit.tripathi@gmail.com", "amit@123", "9876543210");
+//      UserPOSTResponse userResponse = PostUserSOM.createUser(user);
+//      System.out.println("Message : " + userResponse.getMessage());
+//      System.out.println("Code : " + userResponse.getCode());
+//      System.out.println("Type : " + userResponse.getType());
+
         Category category = new Category();
         category.setId(1);
         category.setName("Dogs");
