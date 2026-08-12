@@ -34,7 +34,7 @@ public class PlaywrightDriver {
 //        }
         if (threadLocalBrowser.get() == null) {
             //Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
-            Browser browser = threadLocalPlaywright.get().chromium().launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(true));
+            Browser browser = threadLocalPlaywright.get().chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
             threadLocalBrowser.set(browser);
         }
         System.out.println("Browser Launched");
