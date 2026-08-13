@@ -1,6 +1,4 @@
 package com.orangehrm.pages;
 
-public class MenuBar {
-
-
+public class MenuBar extends NavigationMenuPage {
 }

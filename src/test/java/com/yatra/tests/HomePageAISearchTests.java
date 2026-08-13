@@ -17,7 +17,7 @@ public class HomePageAISearchTests extends BaseTest {
         //1. Open Browser
 
 
-        page.navigate("https://www.yatra.com/");
+        page.navigate(com.awa.framework.utilities.ConfigReader.getProperty("yatra.baseurl"));
 
         Locator departureCity = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("From"));
         departureCity.fill("New Delhi");
@@ -44,7 +44,7 @@ public class HomePageAISearchTests extends BaseTest {
         //Test Steps
         //1. Open Browser
 
-        page.navigate("https://www.yatra.com");
+        page.navigate(com.awa.framework.utilities.ConfigReader.getProperty("yatra.baseurl"));
         //2. Navigate to Home Page
         //3. Enter Invalid Search Query
         //4. Click on Search Button

@@ -1,57 +1,23 @@
 package com.orangehrm.tests;
 
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.AriaRole;
 import com.orangehrm.pages.DashboardPage;
 import com.orangehrm.pages.LoginPage;
 import com.orangehrm.pages.RecruitmentPage;
+import com.orangehrm.testdata.LoginDataProvider;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class OHRMLoginTests extends BaseTest {
-
-    @Test(description = "Verify that the user can log in successfully with valid credentials.")
-    public void validLoginTest() {
-        //Test Steps
-
+    @Test(description = "Verify successful login with valid credentials.", dataProvider = "validLoginData", dataProviderClass = LoginDataProvider.class, groups = {"ui", "smoke"})
+    public void validLoginTest(String username, String password) {
         LoginPage loginPage = new LoginPage();
-        DashboardPage dashboardPage = new DashboardPage();
         loginPage.navigateToLoginPage();
-        loginPage.login("Admin", "admin123");
-        String dashboardPageURL =  dashboardPage.getDashboardTitle();
+        DashboardPage dashboardPage = loginPage.login(username, password);
 
-        System.out.println("Dashboard Page URL: " + dashboardPageURL);
-        //assert dashboardPageURL.contains("dashboard");
+        Assert.assertTrue(dashboardPage.currentUrl().contains("/dashboard"), "Dashboard URL should contain /dashboard");
+        Assert.assertTrue(dashboardPage.isLoaded(), "Dashboard heading should be visible");
 
-
-        dashboardPage.navigateTo("Admin");
-        RecruitmentPage recruitmentPage = new RecruitmentPage();
-        recruitmentPage.navigateTo("Dashboard");
-
-        //assert dashboardPageURL.contains("admin");
-
-        System.out.println("Valid Login Test Executed");
+        dashboardPage.navigateTo("Recruitment");
+        Assert.assertTrue(new RecruitmentPage().isLoaded(), "Recruitment page should be visible");
     }
-    @Test(description = "Verify that the user can log in successfully with valid credentials.")
-    public void validLoginTest2() {
-        //Test Steps
-
-        LoginPage loginPage = new LoginPage();
-        DashboardPage dashboardPage = new DashboardPage();
-        loginPage.navigateToLoginPage();
-        loginPage.login("Admin", "admin123");
-        String dashboardPageURL =  dashboardPage.getDashboardTitle();
-
-        System.out.println("Dashboard Page URL: " + dashboardPageURL);
-        //assert dashboardPageURL.contains("dashboard");
-
-
-        dashboardPage.navigateTo("Admin");
-        RecruitmentPage recruitmentPage = new RecruitmentPage();
-        recruitmentPage.navigateTo("Dashboard");
-
-        //assert dashboardPageURL.contains("admin");
-
-        System.out.println("Valid Login Test Executed");
-    }
-
 }

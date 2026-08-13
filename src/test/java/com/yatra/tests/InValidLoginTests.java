@@ -9,7 +9,7 @@ public class InValidLoginTests extends BaseTest {
         //Test Steps
         //1. Open Browser
 
-        page.navigate("https://www.yatra.com");
+        page.navigate(com.awa.framework.utilities.ConfigReader.getProperty("yatra.baseurl"));
         //2. Navigate to Login Page
         //3. Enter Invalid Credentials
         //4. Click on Login Button

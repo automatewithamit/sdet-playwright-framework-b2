@@ -1,34 +1,16 @@
 package com.orangehrm.tests;
 
 import com.orangehrm.pages.LoginPage;
+import com.orangehrm.testdata.LoginDataProvider;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class RecruitmentTests extends BaseTest{
-
-    @Test(description = "Verify that the user cannot log in with invalid credentials.")
-    public void invalidLoginTest() {
-        //Test Steps
-        //1. Open Browser
+    @Test(description = "Verify invalid credentials are rejected.", dataProvider = "invalidLoginData", dataProviderClass = LoginDataProvider.class, groups = {"ui"})
+    public void invalidLoginTest(String username, String password) {
         LoginPage loginPage = new LoginPage();
         loginPage.navigateToLoginPage();
-        loginPage.login("Admin", "admin1234");
-
-        //assert page.getByText("Invalid credentials").isVisible();
-
-
+        loginPage.login(username, password);
+        Assert.assertTrue(loginPage.isInvalidCredentialsMessageVisible(), "Invalid credentials message should be visible");
     }
-    @Test(description = "Verify that the user cannot log in with invalid credentials.")
-    public void invalidLoginTest1() {
-        //Test Steps
-        //1. Open Browser
-        LoginPage loginPage = new LoginPage();
-        loginPage.navigateToLoginPage();
-        loginPage.login("Admin", "admin1234");
-
-        //assert page.getByText("Invalid credentials").isVisible();
-
-
-    }
-
-
 }
