@@ -41,14 +41,14 @@
   </dependencies>
   <build>
     <plugins>
-<!--      <plugin>-->
-<!--        <groupId>org.apache.maven.plugins</groupId>-->
-<!--        <artifactId>maven-compiler-plugin</artifactId>-->
-<!--        <version>3.15.0</version>-->
-<!--        <configuration>-->
-<!--          <release>17</release> &lt;!&ndash; Target Java version (Java 9+) &ndash;&gt;-->
-<!--        </configuration>-->
-<!--      </plugin>-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.15.0</version>
+        <configuration>
+          <release>17</release> <!-- Target Java version (Java 9+) -->
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
