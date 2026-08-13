@@ -10,31 +10,20 @@ import com.petstore.pojo.Pet;
 import com.petstore.som.PrepareRequest;
 
 public class PostPetSOM {
-    static String endpoint = "/v2/pet";
-    String method = "POST";
-    String contentType = "application/json";
+    private static final String ENDPOINT = "/v2/pet";
 
     public static PetPostResponse createPet(Pet pet) throws JsonProcessingException {
-        System.out.println("----------------------------------------------");
-        System.out.println("-------------Create Pet------------------------");
-        System.out.println("----------------------------------------------");
-        // Create Playwright instance
         String baseUrl = ConfigReader.getProperty("api.baseURL");
         APIRequestContext apiContext = PlaywrightDriver.getApiContext(baseUrl);
-        APIResponse response = apiContext.post(baseUrl + endpoint, PrepareRequest.requestOptions(pet));
-
-        System.out.println("Response Status : " + response.status());
-        System.out.println("Response Body : " + response.text());
-
-
-        ObjectMapper mapper = new ObjectMapper();
-        PetPostResponse petPostResponse  = mapper.readValue(response.text(), PetPostResponse.class);
-
-
-        assert response.ok();
-        //cleanup activity
-        apiContext.dispose();
-        //playwright.close();
-        return petPostResponse;
+        APIResponse response = apiContext.post(ENDPOINT, PrepareRequest.requestOptions(pet));
+        try {
+            if (!response.ok()) {
+                throw new AssertionError("Create pet failed. Status: " + response.status() + ", Body: " + response.text());
+            }
+            return new ObjectMapper().readValue(response.text(), PetPostResponse.class);
+        } finally {
+            PlaywrightDriver.closeApiContext();
+            PlaywrightDriver.closePlaywright();
+        }
     }
 }
